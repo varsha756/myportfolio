@@ -1,138 +1,203 @@
+/* =========================================================
+   Google Font
+========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* =========================================================
+   Reset & Base
+========================================================= */
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'poppins',sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 html{
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  /* Offsets anchor scrolling so content isn't hidden under the fixed header */
+  scroll-padding-top: 100px;
 }
 body{
-    color: #ededed;
-    background: rgb(10, 10, 28);
-    overflow-x: hidden;
+  color: #ededed;
+  background: rgb(10, 10, 28);
+  overflow-x: hidden;
 }
 
-/* Nicer scrollbar (degrades silently in browsers that don't support it) */
-::-webkit-scrollbar{
-    width: 10px;
-}
-::-webkit-scrollbar-track{
-    background: rgb(10,10,28);
-}
+/* =========================================================
+   Scrollbar
+========================================================= */
+::-webkit-scrollbar{ width: 10px; }
+::-webkit-scrollbar-track{ background: rgb(10, 10, 28); }
 ::-webkit-scrollbar-thumb{
-    background: linear-gradient(180deg,#0ef,#a855f7);
-    border-radius: 10px;
+  background: linear-gradient(180deg, #0ef, #a855f7);
+  border-radius: 10px;
 }
 
+/* =========================================================
+   Header & Navigation
+========================================================= */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   padding: 20px 10%;
-  background: rgba(10, 10, 28, 0.4);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  gap: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 60px;
+  background: rgba(10, 10, 28, 0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   z-index: 100;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 .header.scrolled{
   background: rgba(10, 10, 28, 0.85);
-  box-shadow: 0 2px 20px rgba(0,238,255,0.15);
+  box-shadow: 0 2px 20px rgba(0, 238, 255, 0.15);
 }
+
 .logo{
-    position: relative;
-    font-size: 25px;
-    color: #fff;
-    text-decoration: none;
-    cursor: default;
-    opacity: 0;
-    animation: slideRight 1s ease forwards;
-    font-weight: 600;
-    background: linear-gradient(90deg,#fff,#0ef,#fff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: slideRight 1s ease forwards, shine 4s linear infinite 1s;
+  position: relative;
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  cursor: default;
+  opacity: 0;
+  background: linear-gradient(90deg, #fff, #0ef, #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: slideRight 1s ease forwards, shine 4s linear infinite 1s;
 }
-@keyframes shine{
-    to{ background-position: 200% center; }
-}
+
 .navbar a {
-display: inline-block;
-font-size: 25px;
-color: #fff;
-text-decoration: none;
-font-weight: 500;
-margin-left: 35px;
-position: relative;
-transition: color .3s ease;
+  display: inline-block;
+  margin-left: 35px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  transition: color .3s ease;
 }
 .navbar a::after{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0%;
-    height: 2px;
-    background: #0ef;
-    box-shadow: 0 0 8px #0ef;
-    transition: width .3s ease;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #0ef;
+  box-shadow: 0 0 8px #0ef;
+  transition: width .3s ease;
 }
-.navbar a:hover{
-    color: #0ef;
-}
-.navbar a:hover::after{
-    width: 100%;
-}
+.navbar a:hover{ color: #0ef; }
+.navbar a:hover::after{ width: 100%; }
+
+/* Mobile nav open/close state — toggled via portfolio.js */
+.navbar.active{ display: flex; }
+
+/* =========================================================
+   Hero / Home Section
+========================================================= */
 .home {
   position: relative;
   width: 100%;
   height: 100vh;
+  padding: 70px 10% 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 70px 10% 0;
   background-color: rgb(10, 10, 28);
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(0,238,255,0.08), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(168,85,247,0.08), transparent 40%);
+    radial-gradient(circle at 20% 30%, rgba(0, 238, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.08), transparent 40%);
   background-size: cover;
 }
-.home-content{
-    max-width: 50%;
+
+.home-content{ max-width: 50%; }
+
+.home-content h3{
+  font-size: 28px;
+  font-weight: 500;
+  opacity: 0;
+  animation: slidebutton 1s ease forwards;
+  animation-delay: .7s;
 }
-.home-img {
-  width: 400px;
-  height: 400px;
+/* Targets the SECOND <h3> element ("And I'm a ...") — no space before :nth-of-type */
+.home-content h3:nth-of-type(2){ margin-bottom: 20px; }
+.home-content h3 span{ color: #0ef; }
+
+.home-content h1{
+  font-size: 46px;
+  font-weight: 500;
+  margin: -3px 0;
+  opacity: 0;
+  animation: slidebutton 1s ease forwards;
+  animation-delay: 1s;
+}
+
+.home-content p{
+  font-size: 17px;
+  line-height: 1.5;
+  max-width: 90%;
+  opacity: 0;
+  animation: slidebutton 1s ease forwards;
+  animation-delay: 1.3s;
+}
+
+.home-sci {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+.home-sci a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #0ef;
   border-radius: 50%;
-  flex-shrink: 0;
+  font-size: 18px;
+  color: #0ef;
+  text-decoration: none;
+  opacity: 0;
+  transition: 0.3s;
+  animation: slideLeft 1s ease forwards;
+  animation-delay: calc(.2s * var(--i));
+}
+.home-sci a:hover {
+  background: #0ef;
+  color: rgb(10, 10, 28);
+  box-shadow: 0 0 10px #0ef, 0 0 20px #0ef;
+  transform: translateY(-4px) rotate(8deg);
+}
+
+.home-img, .about-img{ display: block; }
+
+.home-img {
+  width: 350px;
+  height: 350px;
   position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
   animation: floatImage 5s ease-in-out infinite;
   will-change: transform;
 }
-
 .home-img::before {
   content: '';
   position: absolute;
   inset: -6px;
   border-radius: 60%;
-  background: conic-gradient(
-    #0ef,
-    #a855f7,
-    #ec4899,
-    #0ef
-  );
+  background: conic-gradient(#0ef, #a855f7, #ec4899, #0ef);
   z-index: -1;
   animation: rotateBorder 4s linear infinite;
 }
-
 .home-img img {
   width: 100%;
   height: 100%;
@@ -140,156 +205,49 @@ transition: color .3s ease;
   object-fit: cover;
   border: 3px solid #0ef;
   box-shadow:
-    0 0 15px #0ef,
-    0 0 30px #0ef,
-    0 0 60px #0ef,
-    0 0 15px #a855f7,
-    0 0 40px #a855f7,
+    0 0 15px #0ef, 0 0 30px #0ef, 0 0 60px #0ef,
+    0 0 15px #a855f7, 0 0 40px #a855f7,
     inset 0 0 15px rgba(0, 238, 255, 0.1);
   transition: transform .4s ease, box-shadow .4s ease;
 }
 .home-img:hover img{
-    transform: scale(1.04);
-    box-shadow:
-    0 0 25px #0ef,
-    0 0 50px #0ef,
-    0 0 80px #0ef,
-    0 0 25px #a855f7,
-    0 0 60px #a855f7,
+  transform: scale(1.04);
+  box-shadow:
+    0 0 25px #0ef, 0 0 50px #0ef, 0 0 80px #0ef,
+    0 0 25px #a855f7, 0 0 60px #a855f7,
     inset 0 0 20px rgba(0, 238, 255, 0.15);
 }
 
-@keyframes rotateBorder {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes floatImage {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-15px); }
-}
-.home-content h3{
-    font-size: 32px;
-    font-weight: 500;
-    opacity: 0;
-    animation: slidebutton 1s ease forwards;
-    animation-delay: .7s;
-}
-.home-content h3 :nth-of-type(2){
-    margin-bottom: 30px;
-}
-.home-content h3 span
-{
-color:#0ef
-}
-.home-content h1{
-    font-size: 50px;
-    font-weight: 500;
-    margin:-3px 0;
-    opacity: 0;
-    animation:slidebutton 1s ease forwards;
-    animation-delay: 1s;
-}
-
-.home-content p{
-    font-size: 20px;
-    opacity: 0;
-    animation: slidebutton 1s ease forwards;
-    animation-delay: 1.3s;
-}
-/* Container — just flexbox row */
-.home-sci {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-/* Each icon link — circle style goes HERE */
-.home-sci a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid #0ef;
-    border-radius: 50%;
-    font-size: 20px;
-    color: #0ef;
-    text-decoration: none;
-    transition: 0.3s;
-    opacity: 0;
-    animation: slideLeft 1s ease forwards;
-    animation-delay:calc(.2s*var(--i));
-}
-
-/* Hover effect */
-.home-sci a:hover {
-    background: #0ef;
-    color: rgb(10, 10, 28);
-    box-shadow: 0 0 10px #0ef, 0 0 20px #0ef;
-    transform: translateY(-4px) rotate(8deg);
-}
-@keyframes slideRight{
-    0%{
-        transform: translateX(-100px);
-        opacity: 0;
-    }
-    100%{
-        transform: translateX(0px);
-        opacity: 1;
-    }
-}
-@keyframes slideLeft{
-    0%{
-        transform: translateX(40px);
-        opacity: 0;
-    }
-    100%{
-        transform: translateX(0px);
-        opacity: 1;
-    }
-}
-@keyframes slidebutton{
-    0%{
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-    100%{
-        transform: translateY(0px);
-        opacity :1;
-    }
+/* =========================================================
+   About Section
+========================================================= */
+.about{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 6rem;
 }
 
 .about-img {
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  width: 400px;
+  height: 400px;
   position: relative;
+  flex-shrink: 0;
+  border-radius: 50%;
   transition: transform .4s ease;
 }
-.about-img:hover{
-    transform: scale(1.03);
-}
-
+.about-img:hover{ transform: scale(1.03); }
 .about-img::before {
   content: '';
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  background: conic-gradient(
-    #0ef,
-    #a855f7,
-    #ec4899,
-    #0ef
-  );
+  background: conic-gradient(#0ef, #a855f7, #ec4899, #0ef);
   z-index: -1;
   animation: rotateBorder 4s linear infinite;
 }
-
 .about-img img {
   width: 100%;
   height: 100%;
@@ -297,226 +255,338 @@ color:#0ef
   object-fit: cover;
   border: 3px solid #0ef;
   box-shadow:
-    0 0 15px #0ef,
-    0 0 30px #0ef,
-    0 0 60px #0ef,
-    0 0 15px #a855f7,
-    0 0 40px #a855f7,
+    0 0 15px #0ef, 0 0 30px #0ef, 0 0 60px #0ef,
+    0 0 15px #a855f7, 0 0 40px #a855f7,
     inset 0 0 15px rgba(0, 238, 255, 0.1);
 }
 
-.btn-box {
+.about-text h2{ font-size: 46px; }
+.about-text h2 span{ color: #0ef; }
+.about-text h4{
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.6;
+  margin: 15px 0 25px;
+}
+.about-text p{
+  color: aliceblue;
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+}
+
+/* =========================================================
+   Buttons (Hero "More About Me" + Service "learn more")
+========================================================= */
+.btn-box, .read {
   display: inline-block;
   padding: 12px 28px;
-  background-color: #0ef;
   border-radius: 40px;
-  font-size: 16px;
-  color: black;
+  font-size: 15px;
   letter-spacing: 1px;
   text-decoration: none;
   font-weight: 600;
   opacity: 0;
-  animation: slideTop 1s ease forwards;
-  animation-delay: 2s;
+  background: #0ef;
   box-shadow: 0 0 5px #0ef, 0 0 25px #0ef;
+  animation: slideTop 1s ease forwards;
+  animation-delay: 1.6s;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+.btn-box{ color: black; }
+.read{ color: #081b29; }
 
-.btn-box:hover {
-  box-shadow: 0 0 5px cyan,
-              0 0 25px cyan,
-              0 0 50px cyan,
-              0 0 100px cyan;
+.btn-box:hover, .read:hover {
+  box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan;
   transform: translateY(-3px);
 }
-.btn-box:active{
-    transform: translateY(0);
-}
+.btn-box:active{ transform: translateY(0); }
 
-@keyframes slideTop {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+/* =========================================================
+   Services Section
+========================================================= */
+.container{ padding: 90px; }
 
-.about{
-    display:grid;
-    grid-template-columns: repeat(2,1fr);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap:1.5rem;
-    padding-bottom: 6rem;
-}
-.about-text h2{
-    font-size: 60px;
-}
-.about-text h2 span{
-    color: #0ef;
-}
-.about-text h4{
-    font-size: 29px;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.7;
-    margin:15px 0 30px;
-}
-.about-text p{
-    color: aliceblue;
-    font-size: 20px;
-    line-height:1.4;
-    margin-bottom: 4rem;
-}
-
-/* Fade-up reveal on scroll (toggle a .reveal class with JS / IntersectionObserver) */
-.reveal{
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity .6s ease, transform .6s ease;
-}
-.reveal.is-visible{
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Mobile view adjustments */
-@media (max-width: 768px) {
-  .header {
-    padding: 15px 5%;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .navbar a {
-    font-size: 18px;
-    margin-left: 15px;
-  }
-
-  .home {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 5% 0;
-  }
-
-  .home-content {
-    max-width: 100%;
-  }
-
-  .home-img {
-    width: 250px;
-    height: 250px;
-    margin-top: 30px;
-  }
-
-  .about {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 3rem 5%;
-  }
-
-  .about-img {
-    width: 250px;
-    height: 250px;
-    margin: 0 auto;
-  }
-
-  .about-text h2 {
-    font-size: 40px;
-  }
-
-  .about-text h4 {
-    font-size: 22px;
-  }
-
-  .about-text p {
-    font-size: 16px;
-    margin-bottom: 2rem;
-  }
-
-  .btn-box {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-}
-
-/* Show both images on desktop */
-.home-img, .about-img {
-  display: block;
-}
-
-/* On mobile, hide the About image */
-@media (max-width: 768px) {
-  .about-img {
-    display: none;
-  }
-}
-
-.navbar.active { display: flex; }
-
-#service{
-  color:aliceblue;
-  font-size: 20px;
-  line-height: 1.4;
-  margin-bottom: 4rem;
-}
-.container{
-  padding: 90px;
-}
 .sub-title{
   text-align: center;
-  font-size: 60px;
-  padding-bottom: 70px;
+  font-size: 46px;
+  padding-bottom: 50px;
 }
-.sub-title span{
-  color:#0ef;
-}
+.sub-title span{ color: #0ef; }
+
 .service-list{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(259px,1fr));
-  grid-gap:40px;
-  margin-top: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+  grid-gap: 40px;
+  margin-top: 40px;
 }
 .service-list div{
-  background-color: rgba(255,255,255,0.02);
-  padding:40px;
-  font-size: 13px;
-  font-weight: 13px;
+  padding: 35px;
   border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: 1px 1px 20px #012290f7, 1px 1px 40px #0053b8f7;
   transition: background 0.5s, transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 1px 1px 20px #012290f7,
-  1px 1px 40px #0053b8f7;
 }
 .service-list div:hover{
   transform: translateY(-8px);
-  background-color: rgba(0,238,255,0.05);
-  box-shadow: 0 0 20px rgba(0,238,255,0.4), 0 0 40px rgba(168,85,247,0.25);
+  background-color: rgba(0, 238, 255, 0.05);
+  box-shadow: 0 0 20px rgba(0, 238, 255, 0.4), 0 0 40px rgba(168, 85, 247, 0.25);
 }
-
-.service-list div{
-  font-size: 20px;
-  margin-bottom: 30px;
-}
-
 .service-list div h2{
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 500;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
-.service-list div a {
-  text-decoration: none;
-  color:#000000;
-  font-size: 12px;
-  margin-top: 20px;
-  display: inline-block;
+.service-list div p{
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-/* Respect users who prefer reduced motion — keeps the site usable everywhere */
+/* =========================================================
+   Skills Section — shared layout
+========================================================= */
+section #skills {
+  display: flex;
+  justify-content: space-between;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.container1{
+  width: 100%;
+  max-width: 400px;
+  padding: 60px 5%;
+}
+
+.heading1{
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  text-decoration-thickness: 4px;
+  margin-bottom: 40px;
+}
+
+/* --- Technical skill bars --- */
+.bar{
+  display: flex;
+  align-items: center;
+  gap:12px;
+  margin-bottom: 18px;
+}
+.bar i{
+  font-size: 30px;
+  margin-right: 8px;
+}.technical-bars {
+  width: 100%;
+  max-width: 400px;
+}
+
+.technical-bars .bar{ margin-top: 15px; }
+.technical-bars .bar:first-child{ margin-top: 0; }
+.technical-bars .bar:last-child{ margin-bottom: 0; }
+.technical-bars .bar .info{ margin-bottom: 8px; }
+.technical-bars .bar .info span{
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0;
+  animation: showText 0.5s linear forwards;
+}
+
+.technical-bars .bar .progress-line{
+  position: relative;
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 1s cubic-bezier(1, 0, 0, 1) forwards;
+}
+.technical-bars .bar .progress-line span{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #0ef, #a855f7);
+  box-shadow: 0 0 10px #0ef;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animateBar 1.2s cubic-bezier(1, 0, 0.3, 1) forwards;
+  animation-delay: .3s;
+}
+
+/* Per-skill fill widths — class names match the HTML exactly (html / css / javascript / python / java / sql) */
+.progress-line.html span{ width:20%; }
+.progress-line.css span{ width: 50%; }
+.progress-line.javascript span{ width: 60%; }
+.progress-line.python span{ width: 80%; }
+.progress-line.java span{ width: 40%; }
+.progress-line.sql span{ width: 75%; }
+
+.progress-line span::before,
+.progress-line span::after{
+  content: "";
+  position: absolute;
+  opacity: 0;
+  animation: showText 0.5s 1.5s linear forwards;
+}
+.progress-line span::after{
+  top: -28px;
+  right: -20px;
+  padding: 1px 8px;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  font-size: 10px;
+}
+.progress-line span::before{
+  top: -10px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-bottom-width: 0;
+  border-right-width: 0;
+  border-top-color: #000;
+}
+.progress-line.html span::after{ content: "90"; }
+.progress-line.css span::after{ content: "50"; }
+.progress-line.javascript span::after{ content: "60"; }
+.progress-line.python span::after{ content: "80"; }
+.progress-line.java span::after{ content: "40"; }
+.progress-line.sql span::after{ content: "75"; }
+
+/* --- Professional / radial skill bars --- */
+.container1:has(.radial-bars){
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+}
+.container1:has(.radial-bars) .heading1{ flex-basis: 100%; }
+
+.radial-bars{
+  width: 45%;
+  height: 170px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.radial-bars svg{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 160px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+.progress-bar{
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 10;
+}
+.path{
+  fill: none;
+  stroke: #0ef;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 502;
+  stroke-dashoffset: 502;
+  transition: stroke-dashoffset 1.5s ease;
+}
+.path-1{ stroke-dashoffset: calc(502 - (502 * 0.9)); } /* 90% */
+.path-2{ stroke-dashoffset: calc(502 - (502 * 0.5)); } /* 50% */
+.path-3{ stroke-dashoffset: calc(502 - (502 * 0.5)); } /* 50% */
+.path-4{ stroke-dashoffset: calc(502 - (502 * 0.2)); } /* 20% */
+
+.percentage{
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+/* Scoped to .radial-bars so this doesn't collide with the Typed.js span.text in the hero */
+.radial-bars .text{
+  font-size: 16px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* =========================================================
+   Scroll-reveal utility (toggled via portfolio.js)
+========================================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   Keyframes
+========================================================= */
+@keyframes slideRight{
+  0%{ transform: translateX(-100px); opacity: 0; }
+  100%{ transform: translateX(0); opacity: 1; }
+}
+@keyframes slideLeft{
+  0%{ transform: translateX(40px); opacity: 0; }
+  100%{ transform: translateX(0); opacity: 1; }
+}
+@keyframes slidebutton{
+  0%{ transform: translateY(-60px); opacity: 0; }
+  100%{ transform: translateY(0); opacity: 1; }
+}
+@keyframes slideTop{
+  from{ transform: translateY(50px); opacity: 0; }
+  to{ transform: translateY(0); opacity: 1; }
+}
+@keyframes shine{ to{ background-position: 200% center; } }
+@keyframes rotateBorder{ from{ transform: rotate(0deg); } to{ transform: rotate(360deg); } }
+@keyframes floatImage{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-15px); }
+}
+@keyframes animate{ 100%{ transform: scaleX(1); } }
+@keyframes animateBar{ to{ transform: scaleX(1); } }
+@keyframes showText{ to{ opacity: 1; } }
+
+/* =========================================================
+   Responsive
+========================================================= */
+@media (max-width: 768px) {
+  .header{ padding: 15px 5%; flex-direction: column; gap: 20px; }
+  .navbar a{ font-size: 16px; margin-left: 15px; }
+
+  .home{ flex-direction: column; justify-content: center; text-align: center; padding: 100px 5% 0; }
+  .home-content{ max-width: 100%; }
+  .home-content p{ max-width: 100%; }
+  .home-content h1{ font-size: 34px; }
+  .home-content h3{ font-size: 22px; }
+  .home-img{ width: 220px; height: 220px; margin-top: 30px; }
+
+  .about{ grid-template-columns: 1fr; text-align: center; padding: 3rem 5%; }
+  .about-img{ display: none; }
+  .about-text h2{ font-size: 32px; }
+  .about-text h4{ font-size: 18px; }
+  .about-text p{ font-size: 15px; margin-bottom: 1.5rem; }
+
+  .btn-box, .read{ padding: 10px 20px; font-size: 13px; }
+
+  .container{ padding: 40px 5%; }
+  .sub-title{ font-size: 32px; padding-bottom: 30px; }
+  .container1{ padding: 40px 5%; }
+  .heading1{ font-size: 26px; }
+
+  .radial-bars{ width: 100%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after{
     animation-duration: 0.01ms !important;
