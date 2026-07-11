@@ -14,7 +14,6 @@
 }
 html{
   scroll-behavior: smooth;
-  /* Offsets anchor scrolling so content isn't hidden under the fixed header */
   scroll-padding-top: 100px;
 }
 body{
@@ -97,7 +96,6 @@ body{
 .navbar a:hover{ color: #0ef; }
 .navbar a:hover::after{ width: 100%; }
 
-/* Mobile nav open/close state — toggled via portfolio.js */
 .navbar.active{ display: flex; }
 
 /* =========================================================
@@ -127,7 +125,6 @@ body{
   animation: slidebutton 1s ease forwards;
   animation-delay: .7s;
 }
-/* Targets the SECOND <h3> element ("And I'm a ...") — no space before :nth-of-type */
 .home-content h3:nth-of-type(2){ margin-bottom: 20px; }
 .home-content h3 span{ color: #0ef; }
 
@@ -347,10 +344,6 @@ body{
 /* =========================================================
    Skills Section — shared layout
 ========================================================= */
-/* FIX: was "section #skills" (a descendant selector requiring an id="skills"
-   element *inside* a <section>), but id="skills" is on the <section> itself,
-   so this rule never matched anything and the two panels stacked vertically
-   instead of sitting side-by-side. */
 #skills {
   display: flex;
   justify-content: space-between;
@@ -425,8 +418,6 @@ body{
   animation-delay: .3s;
 }
 
-/* Per-skill fill widths — class names match the HTML exactly (html / css / javascript / python / java / sql) */
-/* FIX: .html was 20% but its label reads "90" — width now matches the label */
 .progress-line.html span{ width: 90%; }
 .progress-line.css span{ width: 50%; }
 .progress-line.javascript span{ width: 60%; }
@@ -504,10 +495,10 @@ body{
   stroke-dashoffset: 502;
   transition: stroke-dashoffset 1.5s ease;
 }
-.path-1{ stroke-dashoffset: calc(502 - (502 * 0.9)); } /* 90% */
-.path-2{ stroke-dashoffset: calc(502 - (502 * 0.5)); } /* 50% */
-.path-3{ stroke-dashoffset: calc(502 - (502 * 0.5)); } /* 50% */
-.path-4{ stroke-dashoffset: calc(502 - (502 * 0.2)); } /* 20% */
+.path-1{ stroke-dashoffset: calc(502 - (502 * 0.9)); }
+.path-2{ stroke-dashoffset: calc(502 - (502 * 0.5)); }
+.path-3{ stroke-dashoffset: calc(502 - (502 * 0.5)); }
+.path-4{ stroke-dashoffset: calc(502 - (502 * 0.2)); }
 
 .percentage{
   font-size: 20px;
@@ -515,7 +506,6 @@ body{
   margin-top: 10px;
   text-align: center;
 }
-/* Scoped to .radial-bars so this doesn't collide with the Typed.js span.text in the hero */
 .radial-bars .text{
   font-size: 16px;
   margin-top: 5px;
@@ -618,23 +608,36 @@ body{
 .portfolio-content{
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(359px,auto));
+  gap: 30px;
+  padding: 40px 5%;
 }
 .row{
   position: relative;
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
+  height: 260px;                          /* FIX: gives the card real height so it isn't collapsed */
+  background: rgba(255, 255, 255, 0.05);  /* FIX: visible placeholder box when there's no image/video yet */
 }
 .row img{
   width: 100%;
+  height: 100%;            /* FIX: fills the fixed-height row instead of collapsing to 0 */
+  object-fit: cover;       /* FIX: crops nicely instead of stretching */
   border-radius: 8px;
   display: block;
   transition: transform 0.5s;
 }
+.row video{                /* NEW: video sits directly in the row, same sizing rules as img */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #000;
+}
 .layer{
   width: 100%;
   height: 0;
-  /* FIX: rgba(0,0,0,0,1) was invalid (5 args) and dropped the whole gradient */
   background: linear-gradient(rgba(0,0,0,0), #0ef);
   position: absolute;
   border-radius: 8px;
@@ -656,7 +659,6 @@ body{
 }
 .layer p{
   color: #000;
-  /* FIX: "1 rem" (with a space) is invalid CSS and gets ignored */
   font-size: 1rem;
   line-height: 1.8;
 }
@@ -673,7 +675,6 @@ body{
   border-radius: 50%;
 }
 .row:hover img{
-  /* FIX: scale(1,1) is a no-op; zoom in slightly on hover instead */
   transform: scale(1.08, 1.08);
 }
 .row:hover .layer{
@@ -683,7 +684,6 @@ body{
   display: grid;
   grid-template-columns: repeat(2,1fr);
   align-items: center;
-  /* FIX: "3 rem" (with a space) is invalid CSS and gets ignored */
   gap: 3rem;
   padding-left: 130px;
   margin-top: 130px;
@@ -731,6 +731,7 @@ body{
   display:inline-flex;
   vertical-align:middle;
 }
+
 .contact-icons i{
   display: inline-flex;
   justify-content: center;
@@ -759,16 +760,13 @@ body{
 .contact-form form{
   position: relative;
 }
-/* FIX: second selector was unscoped "form textarea" (matched any form's textarea, not just .contact-form's) */
 .contact-form form input, .contact-form form textarea{
   border: none;
   outline: none;
-  /* FIX: width was 18px — far too narrow for a text input; fill the form width */
   width: 100%;
   background: #555557;
   color: #000;
   padding: 10px;
-  /* FIX: "1 rem" (with a space) is invalid CSS and gets ignored */
   font-size: 1rem;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
@@ -788,7 +786,6 @@ body{
   opacity: 0;
   background: #0ef;
   box-shadow: 0 0 5px #0ef, 0 0 25px #0ef;
-  /* FIX: opacity:0 had no animation to bring it back to 1, so the button was permanently invisible */
   animation: slideTop 1s ease forwards;
   animation-delay: 1.6s;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -815,6 +812,5 @@ body{
   background: #0ef;
   font-size: 20px;
   padding: 10px;
-  /* FIX: "border: radius 0.5em;" is invalid — you meant border-radius */
   border-radius: 0.5em;
 }
