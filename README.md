@@ -1,44 +1,68 @@
-# Varsha Goyal — Portfolio Website
+---
 
-A personal portfolio website built with **HTML, CSS, and JavaScript**, showcasing my skills, services, and projects as a B.Tech CSE student transitioning into Python development.
+## 🚀 Getting Started
 
-🔗 **Live Demo:** _Add your deployed link here (e.g., GitHub Pages / Netlify / Vercel)_
+### Prerequisites
+No build tools required — this is a static site.
+
+### Run Locally
+
+1. Clone the repository:
+```bash
+   git clone https://github.com/varsha756/your-repo-name.git
+```
+2. Navigate to the project folder:
+```bash
+   cd your-repo-name
+```
+3. Open `index.html` in your browser, or use a local server (recommended for smooth asset loading):
+```bash
+   npx serve .
+```
+
+### Deploy
+You can deploy this static site for free using:
+- **GitHub Pages**
+- **Netlify**
+- **Vercel**
 
 ---
 
-## 📌 About
+## 🖼️ Sections Overview
 
-This portfolio highlights my journey from Java + MySQL projects (like **Resolvify**) toward Python development, including dashboards, AI-assisted workflows, and interactive tools.
-
----
-
-## ✨ Features
-
-- **Animated Hero Section** with typing effect (via [Typed.js](https://github.com/mattboldt/typed.js))
-- **About Me** section with profile image and bio
-- **Services** section highlighting Full-Stack Mini Projects, Database Design, and Java Application Development
-- **Skills** section with:
-  - Animated technical skill progress bars (HTML, CSS, JavaScript, Python, Java, MySQL)
-  - Radial progress indicators for professional skills (Creativity, Communication, Problem Solving, Teamwork)
-- **Portfolio/Projects** section with hover-reveal cards (video + external links)
-- **Contact** section with a working contact form UI and social icons
-- Fully **responsive design** for mobile and tablet
-- Smooth scroll navigation and scroll-reveal animations
-- Respects `prefers-reduced-motion` for accessibility
+| Section    | Description |
+|------------|-------------|
+| `#home`    | Introduction with animated role text |
+| `#about`   | Bio and background |
+| `#service` | Services offered |
+| `#skills`  | Technical and professional skill bars |
+| `#portfolio` | Featured projects |
+| `#contact` | Contact form and details |
 
 ---
 
-## 🛠️ Tech Stack
+## 📬 Contact
 
-| Technology | Purpose |
-|------------|---------|
-| HTML5      | Page structure |
-| CSS3       | Styling, animations, responsive layout |
-| JavaScript | Interactivity (via `portfolio.js`) |
-| [Typed.js](https://github.com/mattboldt/typed.js) | Typing animation effect |
-| [Boxicons](https://boxicons.com/) | Icon library |
-| Google Fonts (Poppins) | Typography |
+- **Email:** varshagoyalgg@gmail.com
+- **Phone:** 9780293136
+- **GitHub:** [@varsha756](https://github.com/varsha756)
+- **LinkedIn:** [Varsha Goyal](https://www.linkedin.com/in/varsha-goyal-0b86ba244)
 
 ---
 
-## 📁 Project Structure
+## 📝 To-Do / Improvements
+
+- [ ] Replace placeholder project descriptions (Lorem Ipsum) with real project details
+- [ ] Add working backend/email service for contact form (e.g., EmailJS or Formspree)
+- [ ] Add more project links and demo videos
+- [ ] Optimize images for faster load time
+
+---
+
+## 📄 License
+
+This project is open for personal portfolio inspiration. Feel free to fork and customize for your own use.
+
+---
+
+*Built with 💙 by Varsha Goyal*
